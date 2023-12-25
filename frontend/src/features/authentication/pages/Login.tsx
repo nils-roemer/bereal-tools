@@ -56,8 +56,8 @@ const Login = () => {
     mutationFn: sendConfirmationCode,
     onMutate: () => setConfirmationCodeIsSent(true),
     onSuccess: (res) => {
-      console.log("REES: " + res)
-      setCookie(res.data.data.token)
+      console.log(res)
+      setCookie(res.data.token)
       navigate("/")
     },
     onError: () => {

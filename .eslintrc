@@ -1,0 +1,9 @@
+{
+  "plugins": ["@remotion"],
+  "overrides": [
+    {
+      "files": ["frontend/src/features/recapVideo/remotion/*.{ts,tsx}"],
+      "extends": ["plugin:@remotion/recommended"]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { Button } from "antd"
+import Button from "@mui/material/Button"
 import { useNavigate } from "react-router-dom"
 import { deleteCookie } from "../../utils/authUtils"
 
@@ -7,14 +7,19 @@ const Navbar = () => {
 
   return (
     <>
-      <Button type="primary" onClick={() => navigate("/")}>
+      <Button variant="contained" size="small" onClick={() => navigate("/")}>
         Dashboard
       </Button>
-      <Button type="primary" onClick={() => navigate("/recapVideo")}>
+      <Button
+        variant="contained"
+        size="small"
+        onClick={() => navigate("/recapVideo")}
+      >
         RecapVideo
       </Button>
       <Button
-        type="primary"
+        variant="contained"
+        size="small"
         onClick={() => {
           deleteCookie()
           navigate("/login")
@@ -22,7 +27,11 @@ const Navbar = () => {
       >
         Logout
       </Button>
-      <Button type="primary" onClick={() => navigate("/feed")}>
+      <Button
+        variant="contained"
+        size="small"
+        onClick={() => navigate("/feed")}
+      >
         Feed
       </Button>
     </>

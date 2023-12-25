@@ -19,7 +19,7 @@ export interface MemoryPost {
     height: number
   }
   isLate: boolean
-  memoryDay: String
+  memoryDay: string
 }
 
 export interface ProfilePicture {
@@ -134,6 +134,7 @@ export const sendConfirmationCode = async ({
     code: code,
     otpSession: otpSession,
   })
+  console.log(data)
   return data
 }
 
@@ -142,7 +143,25 @@ export const getFeed = async (): Promise<Feed> => {
   return data.data.data
 }
 
-export const getMemoryFeed = async () => {
+export const getMemoryFeed = async (): Promise<MemoryPost[]> => {
   const { data } = await axios.get(apiUrl + "/friends/mem-feed")
   return data.data.data
+}
+
+export const getMemoryFeedWithToken = async (
+  token: string
+): Promise<MemoryPost[]> => {
+  const { data } = await axios.get(apiUrl + "/friends/mem-feed", {
+    headers: {
+      Token: token,
+    },
+  })
+  const memoryPosts = data.data.data
+
+  return memoryPosts.filter((memoryPost: MemoryPost) => {
+    return (
+      memoryPost.primary.url !==
+      "https://cdn.bereal.network/Photos/6Gi1p2d8jAf6Kpvu41kyBHzuppA3/post/ks0hBBwq6deBklKQ.webp"
+    ) // TODO Clean every unavailable pic
+  })
 }
