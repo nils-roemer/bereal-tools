@@ -49,8 +49,8 @@ root.render(
               <Route path="login" element={<Login />}></Route>
             </Route>
             <Route element={<ProtectedRoute />}>
-              <Route path="" element={<Dashboard />}></Route>
-              <Route path="recapVideo" element={<RecapVideo />}></Route>
+              <Route path="dashboard" element={<Dashboard />}></Route>
+              <Route path="" element={<RecapVideo />}></Route>
               <Route path="test" element={<Test />}></Route>
               <Route path="feed" element={<Feed />}></Route>
             </Route>

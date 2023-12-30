@@ -14,7 +14,7 @@ export const MyComposition: React.FC<{ posts: MemoryPost[] }> = ({ posts }) => {
     >
       <Series>
         {posts.map((post: MemoryPost) => (
-          <Series.Sequence durationInFrames={durationInFrames}>
+          <Series.Sequence durationInFrames={durationInFrames} key={post.id}>
             <Img
               placeholder=""
               key={post.id}

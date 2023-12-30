@@ -1,4 +1,9 @@
 import { registerRoot } from "remotion"
-import { RemotionRoot } from "./Root"
+import { RootWrapper } from "./Root"
+import { getCookie } from "../../../utils/authUtils"
 
-registerRoot(RemotionRoot)
+registerRoot(() => {
+  return RootWrapper({
+    token: getCookie(),
+  })
+})

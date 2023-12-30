@@ -6,10 +6,10 @@
 .pnp.js
 
 # testing
-frontend/coverage
+/frontend/coverage
 
 # production
-frontend/build
+/frontend/build
 
 # misc
 .DS_Store
@@ -23,5 +23,5 @@ frontend/build
 /frontend/yarn-error.log*
 
 # env
-frontend/.env
+/frontend/.env
 

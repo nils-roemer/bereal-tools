@@ -17,7 +17,7 @@ const Dashboard = () => {
         setJson(JSON.stringify(res.data.data.data))
       })
       .catch((err) => {
-        console.error("Error getting data:", err)
+        console.error("Eretting data:", err)
       })
   }, [])
 
