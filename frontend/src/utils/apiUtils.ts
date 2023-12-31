@@ -114,6 +114,11 @@ export interface Feed {
   userPosts: PostDetails
 }
 
+export interface UserData {
+  fullname: string
+  profilePicture: Media
+}
+
 export const sendPhoneNumber = async (phoneNumber: string): Promise<any> => {
   const { data } = await axios.post(apiUrl + "/login/send-code", {
     phone: phoneNumber,
@@ -164,4 +169,31 @@ export const getMemoryFeedWithToken = async (
       "https://cdn.bereal.network/Photos/6Gi1p2d8jAf6Kpvu41kyBHzuppA3/post/ks0hBBwq6deBklKQ.webp"
     ) // TODO Clean every unavailable pic
   })
+}
+
+export const get2023Feed = async (token: string): Promise<MemoryPost[]> => {
+  const { data } = await axios.get(apiUrl + "/friends/mem-feed", {
+    headers: {
+      Token: token,
+    },
+  })
+  const memoryPosts = data.data.data
+
+  return memoryPosts.filter((memoryPost: MemoryPost) => {
+    const date = new Date(memoryPost.memoryDay)
+    return (
+      date.getFullYear() === 2023 &&
+      memoryPost.primary.url !==
+        "https://cdn.bereal.network/Photos/6Gi1p2d8jAf6Kpvu41kyBHzuppA3/post/ks0hBBwq6deBklKQ.webp"
+    ) // TODO Clean every unavailable pic
+  })
+}
+
+export const getMeWithToken = async (token: string): Promise<UserData> => {
+  const { data } = await axios.get(apiUrl + "/friends/me", {
+    headers: {
+      Token: token,
+    },
+  })
+  return data.data
 }

@@ -1,7 +1,8 @@
 import React from "react"
 import { Composition, getInputProps } from "remotion"
 import { MyComposition } from "./Composition"
-import { getMemoryFeedWithToken, MemoryPost } from "../../../utils/apiUtils"
+import { get2023Feed, getMeWithToken } from "../../../utils/apiUtils"
+import "./style.css"
 export const durationInFrames = 3
 
 export const RootWrapper: React.FC<{ token: string }> = ({ token }) => {
@@ -15,35 +16,44 @@ export const RemotionRoot: React.FC<{ token: string }> = ({ token }) => {
       component={MyComposition}
       defaultProps={{
         posts: [],
+        userData: {
+          fullname: "",
+          profilePicture: { width: 0, height: 0, url: "" },
+        },
       }}
       calculateMetadata={async () => {
         const { userToken } = getInputProps()
         let data
+        let userData
 
         if (typeof userToken === "string") {
           //AWS lambda rendering
-          data = await getMemoryFeedWithToken(userToken)
+          userData = await getMeWithToken(userToken)
         } else {
           // Web studio rendering
-          data = await getMemoryFeedWithToken(token)
+          userData = await getMeWithToken(token)
         }
-        const thisYearsPosts = data.filter(async (post: MemoryPost) => {
-          const date = new Date(post.memoryDay)
-          return date.getFullYear() === 2023
-        })
-        const dataCleaned = thisYearsPosts.reverse()
+
+        if (typeof userToken === "string") {
+          //AWS lambda rendering
+          data = await get2023Feed(userToken)
+        } else {
+          // Web studio rendering
+          data = await get2023Feed(token)
+        }
 
         return {
           props: {
-            posts: dataCleaned,
+            posts: data.reverse(),
+            userData: userData,
           },
-          durationInFrames: data.length * durationInFrames,
+          durationInFrames: data.length * durationInFrames + 290,
         }
       }}
       durationInFrames={60}
       fps={30}
       width={1500}
-      height={2000}
+      height={2150}
     />
   )
 }

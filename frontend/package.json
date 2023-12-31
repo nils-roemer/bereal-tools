@@ -13,6 +13,7 @@
     "@remotion/eslint-plugin": "4.0.82",
     "@remotion/lambda": "4.0.82",
     "@remotion/player": "4.0.82",
+    "@remotion/tailwind": "4.0.82",
     "@remotion/renderer": "4.0.82",
     "@remotion/zod-types": "^4.0.82",
     "@tanstack/react-query": "^5.14.6",
