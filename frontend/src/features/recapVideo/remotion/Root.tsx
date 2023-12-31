@@ -47,7 +47,7 @@ export const RemotionRoot: React.FC<{ token: string }> = ({ token }) => {
             posts: data.reverse(),
             userData: userData,
           },
-          durationInFrames: data.length * durationInFrames + 290,
+          durationInFrames: data.length * durationInFrames + 299,
         }
       }}
       durationInFrames={60}

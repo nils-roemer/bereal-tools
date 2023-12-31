@@ -1,4 +1,11 @@
-import { AbsoluteFill, Img, Series } from "remotion"
+import {
+  AbsoluteFill,
+  Img,
+  Series,
+  staticFile,
+  Audio,
+  interpolate,
+} from "remotion"
 import React from "react"
 import { MemoryPost, UserData } from "../../../utils/apiUtils"
 import { durationInFrames } from "./Root"
@@ -19,6 +26,18 @@ export const MyComposition: React.FC<{
         color: "white",
       }}
     >
+      <Audio
+        src={staticFile("music.mp3")}
+        volume={(f) =>
+          interpolate(
+            f,
+            [posts.length * 3 + 299 - 240, posts.length * 3 + 299],
+            [1, 0],
+            { extrapolateLeft: "clamp" }
+          )
+        }
+        placeholder={undefined}
+      />
       <Series>
         <Series.Sequence durationInFrames={50} key="intro">
           <HelloFadeIn userData={userData} />
@@ -29,7 +48,7 @@ export const MyComposition: React.FC<{
         <Series.Sequence durationInFrames={50} key="takeALook">
           <TextFadeIn text="Wanna taka a look at them?" />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={20} key="letsgoo">
+        <Series.Sequence durationInFrames={29} key="letsgoo">
           <TextHeading text="Let's go!" />
         </Series.Sequence>
         {posts.map((post: MemoryPost) => (

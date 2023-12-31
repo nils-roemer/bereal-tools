@@ -12,9 +12,10 @@ export const TextHeading: React.FC<{
         backgroundColor: "black",
         color: "white",
         fontSize: 110,
+        width: "100%",
       }}
     >
-      <div>{text}</div>
+      <div style={{ textAlign: "center" }}> {text}</div>
     </AbsoluteFill>
   )
 }

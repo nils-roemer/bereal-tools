@@ -29,8 +29,32 @@ export const HelloFadeIn: React.FC<{
         fontSize: 80,
       }}
     >
-      <div style={{ transform: `scale(${scale})`, fontSize: "120px" }}>
-        <div>Hello {userData.fullname}!</div>
+      <div
+        style={{
+          transform: `scale(${scale})`,
+          fontSize: "120px",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          Hello {userData.fullname}!
+        </div>
+      </div>
+      <div
+        style={{
+          transform: `scale(${scale})`,
+          fontSize: "120px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Img
           placeholder=""
           style={{

@@ -5,11 +5,28 @@ import { getCookie } from "../../../utils/authUtils"
 import { useState } from "react"
 import CircularProgressWithLabel from "../components/CircularProgressWithLabel"
 import ReactPlayer from "react-player"
+import { getVideoUrl, setVideoUrlCookie } from "../../../utils/cookieUtil"
+import { ArrowCircleDown } from "@mui/icons-material"
 
 const RecapVideo = () => {
   const [isRendering, setIsRendering] = useState(false)
   const [renderingProgress, setRenderingProgress] = useState(0)
-  const [videoUrl, setVideoUrl] = useState("")
+  const [videoUrl, setVideoUrl] = useState(getVideoUrl)
+
+  const handleDownload = () => {
+    const link = document.createElement("a")
+    link.href = videoUrl
+    link.download = "download"
+
+    // Append to the DOM
+    document.body.appendChild(link)
+
+    // Programmatically click the link to trigger the download
+    link.click()
+
+    // Remove the element from the DOM
+    document.body.removeChild(link)
+  }
 
   const renderVideo = async () => {
     const functionName = "remotion-render-4-0-82-mem2048mb-disk2048mb-120sec"
@@ -47,6 +64,7 @@ const RecapVideo = () => {
       setRenderingProgress(progress.overallProgress * 100)
       if (progress.done) {
         setVideoUrl(progress.outputFile || "")
+        setVideoUrlCookie(progress.outputFile || "")
         setIsRendering(false)
         break
       }
@@ -86,6 +104,15 @@ const RecapVideo = () => {
         <div className="flex flex-col justify-center items-center h-[630px]">
           <div className="mb-5 font-bold text-2xl">Your BeReal Recap</div>
           <ReactPlayer url={videoUrl} width="350px" playing loop controls />
+          {!videoUrl && (
+            <div className="mt-5">
+              <Button variant="contained" endIcon={<ArrowCircleDown />}>
+                <div className="text-md" onClick={handleDownload}>
+                  Download Video
+                </div>
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </MainLayout>
