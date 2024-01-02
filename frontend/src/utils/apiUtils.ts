@@ -117,6 +117,7 @@ export interface Feed {
 export interface UserData {
   fullname: string
   profilePicture: Media
+  username: string
 }
 
 export const sendPhoneNumber = async (phoneNumber: string): Promise<any> => {

@@ -16,6 +16,7 @@ import RecapVideo from "./features/recapVideo/pages/RecapVideo"
 import Feed from "./features/feed/pages/Feed"
 import { purple } from "@mui/material/colors"
 import Imprint from "./pages/Imprint"
+import SaveToCameraRoll from "./features/recapVideo/pages/SaveToCameraRoll"
 
 const queryClient = new QueryClient()
 
@@ -52,8 +53,12 @@ root.render(
               <Route path="dashboard" element={<Dashboard />}></Route>
               <Route path="" element={<RecapVideo />}></Route>
               <Route path="test" element={<Test />}></Route>
-              <Route path="feed" element={<Feed />}></Route>
+              <Route path="feed" element={<Feed />}></Route>/
             </Route>
+            <Route
+              path="save-to-camera-roll"
+              element={<SaveToCameraRoll />}
+            ></Route>
             <Route path="*" element={<PageNotFound />}></Route>
           </Routes>
         </BrowserRouter>

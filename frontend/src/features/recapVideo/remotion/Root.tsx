@@ -3,6 +3,7 @@ import { Composition, getInputProps } from "remotion"
 import { MyComposition } from "./Composition"
 import { get2023Feed, getMeWithToken } from "../../../utils/apiUtils"
 import "./style.css"
+import { setUserNameCookie } from "../../../utils/cookieUtil"
 export const durationInFrames = 3
 
 export const RootWrapper: React.FC<{ token: string }> = ({ token }) => {
@@ -19,6 +20,7 @@ export const RemotionRoot: React.FC<{ token: string }> = ({ token }) => {
         userData: {
           fullname: "",
           profilePicture: { width: 0, height: 0, url: "" },
+          username: "",
         },
       }}
       calculateMetadata={async () => {
@@ -33,6 +35,8 @@ export const RemotionRoot: React.FC<{ token: string }> = ({ token }) => {
           // Web studio rendering
           userData = await getMeWithToken(token)
         }
+
+        setUserNameCookie(userData.username.replaceAll(".", "-"))
 
         if (typeof userToken === "string") {
           //AWS lambda rendering
