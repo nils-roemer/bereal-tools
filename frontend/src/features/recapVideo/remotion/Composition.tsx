@@ -46,7 +46,7 @@ export const MyComposition: React.FC<{
           <PostCount postCount={posts.length} />
         </Series.Sequence>
         <Series.Sequence durationInFrames={50} key="takeALook">
-          <TextFadeIn text="Wanna taka a look at them?" />
+          <TextFadeIn text="Wanna take a look at them?" />
         </Series.Sequence>
         <Series.Sequence durationInFrames={29} key="letsgoo">
           <TextHeading text="Let's go!" />
