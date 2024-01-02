@@ -63,9 +63,17 @@ export const HelloFadeIn: React.FC<{
             borderColor: "white",
             marginTop: "80px",
           }}
-          key={userData.profilePicture.url}
+          key={
+            userData.profilePicture.url
+              ? userData.profilePicture.url
+              : "missing"
+          }
           alt="primary"
-          src={userData.profilePicture.url}
+          src={
+            userData.profilePicture.url
+              ? userData.profilePicture.url
+              : "missing-profile-pic.png"
+          }
         />
       </div>
     </AbsoluteFill>
